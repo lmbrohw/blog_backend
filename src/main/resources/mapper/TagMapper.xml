@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjtu.blog_backend.mapper.TagMapper">
+
+    <resultMap id="tag" type="com.xjtu.blog_backend.entity.Tag">
+        <id property="id" column="id"/>
+        <result property="tagName" column="tag_name"/>
+        <result property="color" column="color"/>
+    </resultMap>
+    <!--获取所有标签List不查询id-->
+    <select id="getTagListNotId" resultMap="tag">
+        select tag_name, color
+        from tag
+        order by id desc
+    </select>
+</mapper>
