@@ -2,8 +2,7 @@ package com.xjtu.blog_backend.service;
 
 import com.xjtu.blog_backend.entity.Blog;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xjtu.blog_backend.entity.vo.NewBlog;
-import com.xjtu.blog_backend.entity.vo.RandomBlog;
+import com.xjtu.blog_backend.entity.vo.*;
 
 import java.util.List;
 
@@ -20,4 +19,6 @@ public interface BlogService extends IService<Blog> {
     List<NewBlog> getNewBlogListByIsPublished();
 
     List<RandomBlog> getRandomBlogListByLimitNumAndIsPublishedAndIsRecommend();
+
+    PageResult<BlogInfo> getBlogInfoListByIsPublished(Integer pageNum);
 }

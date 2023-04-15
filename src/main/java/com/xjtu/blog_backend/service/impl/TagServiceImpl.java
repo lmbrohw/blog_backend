@@ -37,4 +37,9 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         redisService.saveListToValue(redisKey, tagList);
         return tagList;
     }
+
+    @Override
+    public List<Tag> getTagListByBlogId(Long id) {
+        return tagMapper.getTagListByBlogId(id);
+    }
 }

@@ -16,4 +16,6 @@ import java.util.List;
 public interface TagService extends IService<Tag> {
 
     List<Tag> getTagListNotId();
+
+    List<Tag> getTagListByBlogId(Long id);
 }
