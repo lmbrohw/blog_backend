@@ -1,0 +1,33 @@
+package com.xjtu.blog_backend.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+
+/**
+ * Redis序列化配置
+ *
+ * @Author: Huwwww
+ * @Date: 2023/4/17 15:41
+ **/
+@Configuration
+public class RedisSerializeConfig {
+    /**
+     * 使用JSON序列化方式
+     *
+     * @param redisConnectionFactory
+     * @return RedisTemplate<Object, Object>
+     * @Author Huwwww
+     * @Date 2023/4/17 15:42
+     */
+    @Bean
+    public RedisTemplate<Object, Object> jsonRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<Object, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(redisConnectionFactory);
+        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
+        template.setDefaultSerializer(serializer);
+        return template;
+    }
+}

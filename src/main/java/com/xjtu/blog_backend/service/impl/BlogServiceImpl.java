@@ -3,11 +3,13 @@ package com.xjtu.blog_backend.service.impl;
 import com.github.pagehelper.PageInfo;
 import com.xjtu.blog_backend.config.RedisKeyConfig;
 import com.xjtu.blog_backend.entity.Blog;
+import com.xjtu.blog_backend.entity.dto.BlogView;
 import com.xjtu.blog_backend.entity.vo.BlogInfo;
 import com.xjtu.blog_backend.entity.vo.NewBlog;
 import com.xjtu.blog_backend.entity.vo.PageResult;
 import com.xjtu.blog_backend.entity.vo.RandomBlog;
 import com.xjtu.blog_backend.mapper.BlogMapper;
+import com.xjtu.blog_backend.markdown.MarkdownUtils;
 import com.xjtu.blog_backend.service.BlogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xjtu.blog_backend.service.RedisService;
@@ -18,7 +20,10 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 
 
+import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -45,6 +50,39 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
     private static final int pageSize = 5;
     //博客简介列表排序方式
     private static final String orderBy = "is_top desc, create_time desc";
+
+    /**
+     * 项目启动时，保存所有博客的浏览量到Redis
+     *
+     * @Author Huwwww
+     * @Date 2023/4/17 15:12
+     */
+    @PostConstruct
+    private void saveBlogViewsToRedis() {
+        String redisKey = RedisKeyConfig.BLOG_VIEWS_MAP;
+        if (!redisService.hasKey(redisKey)) {
+            Map<Long, Integer> blogViewsMap = getBlogViewsMap();
+            redisService.saveMapToHash(redisKey, blogViewsMap);
+        }
+    }
+
+    /**
+     * 从数据库获取blog浏览量
+     *
+     * @return java.util.Map<java.lang.Long, java.lang.Integer>
+     * @Author Huwwww
+     * @Date 2023/4/17 15:33
+     */
+    private Map<Long, Integer> getBlogViewsMap() {
+        List<BlogView> blogViewList = blogMapper.getBlogViewsList();
+        Map<Long, Integer> blogViewsMap = new HashMap<>();
+        for (BlogView blogView : blogViewList) {
+            blogViewsMap.put(blogView.getId(), blogView.getViews());
+        }
+        return blogViewsMap;
+
+    }
+
 
     @Override
     public List<NewBlog> getNewBlogListByIsPublished() {
@@ -115,6 +153,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
         for (int i = 0; i < blogInfos.size(); i++) {
             BlogInfo blogInfo = JacksonUtils.convertValue(blogInfos.get(i), BlogInfo.class);
             Long blogId = blogInfo.getId();
+            System.out.println(blogId);
             int view = (int) redisService.getValueByHashKey(redisKey, blogId);
             blogInfo.setViews(view);
             blogInfos.set(i, blogInfo);
