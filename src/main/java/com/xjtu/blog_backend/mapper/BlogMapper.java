@@ -26,4 +26,5 @@ public interface BlogMapper extends BaseMapper<Blog> {
     List<BlogInfo> getBlogInfoListByIsPublished();
 
     List<BlogView> getBlogViewsList();
+    List<Blog> getIdAndTitleList();
 }

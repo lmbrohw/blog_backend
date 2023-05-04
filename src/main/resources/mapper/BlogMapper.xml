@@ -70,4 +70,16 @@
                views
         from blog
     </select>
+
+    <resultMap id="blogIdAndTitle" type="com.xjtu.blog_backend.entity.vo.BlogIdAndTitle">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+    </resultMap>
+
+    <!--查询所有博客id和title-->
+    <select id="getIdAndTitleList" resultMap="blogIdAndTitle">
+        select id, title
+        from blog
+        order by create_time desc
+    </select>
 </mapper>

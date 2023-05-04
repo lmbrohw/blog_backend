@@ -140,6 +140,11 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
         return pageResult;
     }
 
+    @Override
+    public List<Blog> getIdAndTitleList() {
+        return blogMapper.getIdAndTitleList();
+    }
+
     /**
      * 将pageResult中博客对象的浏览量设置为Redis中的最新值
      *

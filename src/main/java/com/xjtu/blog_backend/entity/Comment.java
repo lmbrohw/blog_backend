@@ -4,6 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.xjtu.blog_backend.entity.vo.BlogIdAndTitle;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -93,6 +97,9 @@ public class Comment implements Serializable {
      * 如果评论昵称为QQ号，则将昵称和头像置为QQ昵称和QQ头像，并将此字段置为QQ号备份
      */
     private String qq;
+
+    private BlogIdAndTitle blog;//所属的文章
+    private List<Comment> replyComments = new ArrayList<>();//回复该评论的评论
 
 
 }

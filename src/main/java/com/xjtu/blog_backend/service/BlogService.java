@@ -21,4 +21,5 @@ public interface BlogService extends IService<Blog> {
     List<RandomBlog> getRandomBlogListByLimitNumAndIsPublishedAndIsRecommend();
 
     PageResult<BlogInfo> getBlogInfoListByIsPublished(Integer pageNum);
+    List<Blog> getIdAndTitleList();
 }
