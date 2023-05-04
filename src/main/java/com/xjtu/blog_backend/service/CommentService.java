@@ -11,8 +11,8 @@ import java.util.List;
  *  服务类
  * </p>
  *
- * @author Huwwww
- * @since 2023-04-05
+ * @author Sun ZhongZheng
+ * @since 2023-05-04
  */
 public interface CommentService extends IService<Comment> {
     List<Comment> getListByPageAndParentCommentId(Integer page, Long blogId, Long parentCommentId);

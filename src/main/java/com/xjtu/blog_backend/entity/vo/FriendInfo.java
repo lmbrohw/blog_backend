@@ -7,6 +7,7 @@ import lombok.ToString;
 
 /**
  * @Description: 友链页面信息
+ * @Author：Sun ZhongZheng
  * @Date: 2020-09-09
  */
 @NoArgsConstructor
