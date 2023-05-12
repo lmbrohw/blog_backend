@@ -2,7 +2,10 @@ package com.rawchen.controller.admin;
 
 import com.rawchen.config.RedisKeyConfig;
 import com.rawchen.entity.CityVisitor;
+import com.rawchen.model.vo.BlogIdAndTitle;
 import com.rawchen.model.vo.Result;
+import com.rawchen.service.BlogService;
+import com.rawchen.service.CommentService;
 import com.rawchen.service.DashboardService;
 import com.rawchen.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,10 @@ public class DashboardAdminController {
 	DashboardService dashboardService;
 	@Autowired
 	RedisService redisService;
+	@Autowired
+	CommentService commentService;
+	@Autowired
+	BlogService blogService;
 
 	@GetMapping("/dashboard")
 	public Result dashboard() {
@@ -46,6 +53,17 @@ public class DashboardAdminController {
 		map.put("tag", tagBlogCountMap);
 		map.put("visitRecord", visitRecordMap);
 		map.put("cityVisitor", cityVisitorList);
+
+		//		根据博客浏览量自动推荐博客
+		List<BlogIdAndTitle> idAndTitleList = blogService.getIdAndTitleList();
+		for (BlogIdAndTitle blogIdAndTitle : idAndTitleList) {
+			Long blogId = blogIdAndTitle.getId();
+			if (commentService.countByPageAndIsPublished(0, blogId) > 3) {
+				blogService.updateBlogRecommendById(blogId, true);
+				System.out.println("修改成功！");
+			}
+		}
+
 		return Result.ok("获取成功", map);
 	}
 }

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.rawchen.config.RedisKeyConfig;
 import com.rawchen.entity.Blog;
+import com.rawchen.model.vo.BlogIdAndTitle;
 import com.rawchen.exception.NotFoundException;
 import com.rawchen.exception.PersistenceException;
 import com.rawchen.mapper.BlogMapper;
@@ -86,7 +87,7 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public List<Blog> getIdAndTitleList() {
+	public List<BlogIdAndTitle> getIdAndTitleList() {
 		return blogMapper.getIdAndTitleList();
 	}
 

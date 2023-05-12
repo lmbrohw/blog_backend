@@ -2,12 +2,7 @@ package com.rawchen.service;
 
 import com.rawchen.entity.Blog;
 import com.rawchen.model.dto.BlogVisibility;
-import com.rawchen.model.vo.BlogDetail;
-import com.rawchen.model.vo.BlogInfo;
-import com.rawchen.model.vo.NewBlog;
-import com.rawchen.model.vo.PageResult;
-import com.rawchen.model.vo.RandomBlog;
-import com.rawchen.model.vo.SearchBlog;
+import com.rawchen.model.vo.*;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +12,7 @@ public interface BlogService {
 
 	List<SearchBlog> getSearchBlogListByQueryAndIsPublished(String query);
 
-	List<Blog> getIdAndTitleList();
+	List<BlogIdAndTitle> getIdAndTitleList();
 
 	List<NewBlog> getNewBlogListByIsPublished();
 

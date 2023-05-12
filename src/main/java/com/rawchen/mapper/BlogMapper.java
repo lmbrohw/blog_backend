@@ -3,15 +3,9 @@ package com.rawchen.mapper;
 import com.rawchen.entity.Blog;
 import com.rawchen.model.dto.BlogView;
 import com.rawchen.model.dto.BlogVisibility;
+import com.rawchen.model.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
-import com.rawchen.model.vo.ArchiveBlog;
-import com.rawchen.model.vo.BlogDetail;
-import com.rawchen.model.vo.BlogInfo;
-import com.rawchen.model.vo.CategoryBlogCount;
-import com.rawchen.model.vo.NewBlog;
-import com.rawchen.model.vo.RandomBlog;
-import com.rawchen.model.vo.SearchBlog;
 
 import java.util.List;
 
@@ -26,7 +20,7 @@ public interface BlogMapper {
 
 	List<SearchBlog> getSearchBlogListByQueryAndIsPublished(String query);
 
-	List<Blog> getIdAndTitleList();
+	List<BlogIdAndTitle> getIdAndTitleList();
 
 	List<NewBlog> getNewBlogListByIsPublished();
 

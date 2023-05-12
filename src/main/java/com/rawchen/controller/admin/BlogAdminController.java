@@ -8,6 +8,7 @@ import com.rawchen.entity.Category;
 import com.rawchen.entity.Tag;
 import com.rawchen.entity.User;
 import com.rawchen.model.dto.BlogVisibility;
+import com.rawchen.model.vo.BlogIdAndTitle;
 import com.rawchen.model.vo.Result;
 import com.rawchen.service.BlogService;
 import com.rawchen.service.CategoryService;

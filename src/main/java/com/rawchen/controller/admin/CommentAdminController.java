@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.rawchen.annotation.OperationLogger;
 import com.rawchen.entity.Blog;
 import com.rawchen.entity.Comment;
+import com.rawchen.model.vo.BlogIdAndTitle;
 import com.rawchen.model.vo.Result;
 import com.rawchen.service.BlogService;
 import com.rawchen.service.CommentService;
@@ -60,7 +61,7 @@ public class CommentAdminController {
 	 */
 	@GetMapping("/blogIdAndTitle")
 	public Result blogIdAndTitle() {
-		List<Blog> blogs = blogService.getIdAndTitleList();
+		List<BlogIdAndTitle> blogs = blogService.getIdAndTitleList();
 		return Result.ok("请求成功", blogs);
 	}
 
