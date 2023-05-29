@@ -58,7 +58,7 @@ public class DashboardAdminController {
 		List<BlogIdAndTitle> idAndTitleList = blogService.getIdAndTitleList();
 		for (BlogIdAndTitle blogIdAndTitle : idAndTitleList) {
 			Long blogId = blogIdAndTitle.getId();
-			if (commentService.countByPageAndIsPublished(0, blogId) > 3) {
+			if (commentService.countByPageAndIsPublished(0, blogId) > 8) {
 				blogService.updateBlogRecommendById(blogId, true);
 				System.out.println("修改成功！");
 			}

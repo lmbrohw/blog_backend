@@ -197,8 +197,7 @@ public class BlogAdminController {
 		//处理分类
 		Object cate = blog.getCate();
 		if (cate == null) {
-//			return Result.error("分类不能为空");
-			cate = 1;
+			return Result.error("分类不能为空");
 		}
 		if (cate instanceof Integer) {//选择了已存在的分类
 			Category c = categoryService.getCategoryById(((Integer) cate).longValue());
@@ -218,9 +217,8 @@ public class BlogAdminController {
 		}
 
 		//处理标签
-//		List<Object> tagList = blog.getTagList();
-		List<Object> tagList = new ArrayList<>();
-		tagList.add(1);
+		List<Object> tagList = blog.getTagList();
+//		tagList.add(1);
 		List<Tag> tags = new ArrayList<>();
 		for (Object t : tagList) {
 			if (t instanceof Integer) {//选择了已存在的标签
